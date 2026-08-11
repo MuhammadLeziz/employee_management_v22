@@ -1,0 +1,84 @@
+.employee-form-page {
+  display: grid;
+  gap: 14px;
+  padding: 10px;
+}
+
+.form-card {
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.form-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.section-title {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.form-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.employee-form {
+  display: grid;
+  gap: 12px;
+  padding: 16px 18px 20px;
+}
+
+.field-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field-group {
+  display: grid;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.field-group span {
+  color: var(--muted);
+}
+
+.field-group input,
+.field-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 0.96rem;
+  outline: none;
+}
+
+.field-group input:focus,
+.field-group select:focus {
+  border-color: rgba(var(--primary-rgb), 0.45);
+  box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}

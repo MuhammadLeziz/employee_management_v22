@@ -1,0 +1,252 @@
+.dashboard-page {
+	display: grid;
+	gap: 18px;
+	padding: 8px;
+}
+
+.dashboard-header,
+.dashboard-panel,
+.stat-card {
+	border: 1px solid var(--card-border);
+	border-radius: 18px;
+	background: var(--card-bg);
+	box-shadow: var(--card-shadow);
+}
+
+.dashboard-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 22px;
+	background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.42), var(--card-bg));
+}
+
+.section-title {
+	margin: 0 0 4px;
+	color: var(--muted);
+	font-size: 0.78rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.dashboard-header h1 {
+	max-width: 650px;
+	margin: 0;
+	color: var(--text);
+	font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+	line-height: 1.12;
+}
+
+.dashboard-subtitle {
+	margin: 8px 0 0;
+	color: var(--muted);
+}
+
+.dashboard-date {
+	padding: 8px 12px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.7);
+	color: var(--primary);
+	font-size: 0.78rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.dashboard-stats,
+.dashboard-lists {
+	margin: 0;
+}
+
+.stat-card {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	height: 100%;
+	padding: 20px;
+}
+
+.stat-card--employees {
+	border-left: 4px solid var(--primary);
+}
+
+.stat-card--projects {
+	border-left: 4px solid var(--secondary);
+}
+
+.stat-icon,
+.employee-avatar,
+.project-mark {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	font-weight: 800;
+}
+
+.stat-icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 14px;
+	background: var(--accent);
+	color: var(--primary);
+}
+
+.stat-card--projects .stat-icon {
+	background: rgba(var(--secondary-rgb), 0.12);
+}
+
+.stat-card div:last-child {
+	display: grid;
+	gap: 3px;
+}
+
+.stat-label {
+	color: var(--muted);
+	font-size: 0.82rem;
+}
+
+.stat-card strong {
+	color: var(--text);
+	font-size: 1.9rem;
+	line-height: 1;
+}
+
+.stat-card small {
+	color: var(--muted);
+	font-size: 0.74rem;
+}
+
+.dashboard-panel {
+	height: 100%;
+	padding: 20px;
+}
+
+.panel-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--border);
+}
+
+.panel-heading h2 {
+	margin: 0;
+	color: var(--text);
+	font-size: 1.2rem;
+}
+
+.panel-count {
+	min-width: 30px;
+	padding: 6px 9px;
+	border-radius: 999px;
+	background: rgba(var(--accent-rgb), 0.35);
+	color: var(--primary);
+	font-size: 0.75rem;
+	font-weight: 800;
+	text-align: center;
+}
+
+.employee-list,
+.project-list {
+	display: grid;
+}
+
+.employee-row,
+.dashboard-project-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.employee-row:last-child,
+.dashboard-project-row:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.employee-avatar,
+.project-mark {
+	width: 38px;
+	height: 38px;
+	border-radius: 12px;
+	background: var(--accent);
+	color: var(--primary);
+	font-size: 0.9rem;
+}
+
+.employee-info,
+.project-info {
+	display: grid;
+	min-width: 0;
+	gap: 3px;
+}
+
+.employee-info strong,
+.project-info strong {
+	overflow: hidden;
+	color: var(--text);
+	font-size: 0.86rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.employee-info span,
+.project-info span,
+.employee-row time,
+.project-date span,
+.project-date time {
+	color: var(--muted);
+	font-size: 0.74rem;
+}
+
+.employee-row time {
+	margin-left: auto;
+	white-space: nowrap;
+}
+
+.project-info {
+	flex: 1;
+}
+
+.project-date {
+	display: grid;
+	gap: 3px;
+	min-width: 105px;
+	text-align: right;
+}
+
+.project-date time {
+	color: var(--text);
+	font-weight: 700;
+}
+
+.dashboard-loading {
+	padding: 40px;
+	border: 1px solid var(--border);
+	border-radius: 18px;
+	background: var(--surface);
+	color: var(--muted);
+	text-align: center;
+}
+
+@media (max-width: 620px) {
+	.dashboard-header {
+		flex-direction: column;
+	}
+
+	.dashboard-date {
+		align-self: flex-start;
+	}
+
+	.dashboard-panel {
+		padding: 16px;
+	}
+
+	.project-date {
+		min-width: 88px;
+	}
+}

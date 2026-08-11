@@ -1,0 +1,214 @@
+<div class="projects-page">
+    <div class="page-header app-card">
+        <div>
+            <p class="section-title">Project workspace</p>
+            <h2>Manage projects</h2>
+            <p class="page-subtitle">Keep delivery details, ownership, and client contacts in one place.</p>
+        </div>
+        <button class="btn btn-primary" type="button" (click)="showFormPanel()">Add project</button>
+    </div>
+
+    <div class="project-content row g-4">
+        <section class="project-list-section " [ngClass]="isFormVisiable ?'col-lg-8':'col-lg-12'"
+            aria-labelledby="project-list-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="section-title">Active portfolio</p>
+                    <h3 id="project-list-heading">Your projects</h3>
+                </div>
+                <span class="project-count">3 projects</span>
+            </div>
+
+            <div class="project-grid row g-3">
+                @for (item of projectList(); track $index) {
+                <div class="col-md-4">
+                    <article class="project-card app-card">
+                        <div class="project-card-topline">
+                            <span class="project-id">{{item.projectName.charAt(0)}}</span>
+                            <span class="status-badge app-badge">{{item.startDate | date:'dd-MMM-yy'}}</span>
+                        </div>
+                        <h4>{{item.projectName}}</h4>
+                        <p class="client-name">{{item.clientName}}</p>
+                        <div class="project-details">
+                            <div>
+                                <span class="detail-label">Lead</span>
+                                <strong>{{item.employeeName}}</strong>
+                            </div>
+                        </div>
+                        <div class="project-card-footer">
+                            <a class="contact-link" href="mailto:maya@northstarlabs.com">maya@northstarlabs.com</a>
+                            <div class="card-actions">
+                                <button class="btn btn-employee" type="button"  (click)="openEmpModal(item.projectId)">Employee</button>
+                                <button class="btn btn-sec" type="button">Edit</button>
+                                <button class="btn btn-ghost" type="button">Delete</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                }
+
+
+
+            </div>
+        </section>
+        @if (isFormVisiable) {
+        <section class="project-form-card app-card col-lg-4" aria-labelledby="project-form-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="section-title">Project details</p>
+                    <h3 id="project-form-heading">Add a project</h3>
+                </div>
+                <span class="form-step">01 / 01</span>
+            </div>
+
+            <form class="project-form" [formGroup]="projectForm">
+                <input id="projectId" name="projectId" type="hidden" value="0">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="projectName">Project name</label>
+                        <input class="form-control" formControlName="projectName" id="projectName" type="text" placeholder="e.g. Website redesign">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="clientName">Client name</label>
+                        <input class="form-control" formControlName="clientName" id="clientName" type="text" placeholder="e.g. Northstar Labs">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="startDate">Start date</label>
+                        <input class="form-control" formControlName="startDate" id="startDate" type="date">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="leadByEmpId">Lead employee ID</label>
+                        <select class="form-select" formControlName="leadByEmpId" >
+                            <option value="">Select Employee</option>
+                            @for (item of empList$| async; track $index) {
+                                <option [value]="item.employeeId">{{item.employeeName}}</option>
+                            }
+                        </select>
+                     
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="contactPerson">Contact person</label>
+                        <input class="form-control" formControlName="contactPerson" id="contactPerson" type="text" placeholder="e.g. Maya Chen">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="contactNo">Contact number</label>
+                        <input class="form-control" formControlName="contactNo" id="contactNo" type="tel" placeholder="e.g. +1 555 0100">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="emailId">Email address</label>
+                        <input class="form-control" formControlName="emailId" id="emailId" type="email" placeholder="client@example.com">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-ghost" type="reset">Cancel</button>
+                    <button class="btn btn-primary" type="button" (click)="saveProject()">Save project</button>
+                </div>
+            </form>
+        </section>
+        }
+
+    </div>
+</div>
+
+<div class="modal"  #empModal  id="employeeAssignmentModal" tabindex="-1"
+    aria-labelledby="employeeAssignmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content assignment-modal app-card">
+            <div class="modal-header">
+                <div>
+                    <p class="section-title">Project assignment</p>
+                    <h3 class="modal-title" id="employeeAssignmentModalLabel">Project employees</h3>
+                </div>
+                <button type="button" class="btn-close"  (click)="closeEmpModal()"></button>
+            </div>
+
+            <form>
+                <div class="modal-body">
+                    <input id="empProjectId" name="empProjectId" type="hidden" value="0">
+                    <input id="assignmentProjectId" name="projectId" type="hidden" value="0">
+
+                    <div class="assignment-form row g-3 align-items-end">
+                        <div class="col-lg-4 col-md-6">
+                            <label class="form-label" for="assignmentEmployeeId">Employee</label>
+                            <select class="form-select" [(ngModel)]="assignEmpObj.empId" id="assignmentEmployeeId" name="empId">
+                                <option value="0">Select employee</option>
+                               @for (item of empList$| async; track $index) {
+                                <option [value]="item.employeeId">{{item.employeeName}}</option>
+                            }
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <label class="form-label" for="assignedDate">Assigned date</label>
+                            <input class="form-control" [(ngModel)]="assignEmpObj.assignedDate" id="assignedDate" name="assignedDate" type="date">
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <label class="form-label" for="assignmentRole">Role</label>
+                            <input class="form-control" [(ngModel)]="assignEmpObj.role" id="assignmentRole" name="role" type="text"
+                                placeholder="e.g. Developer">
+                        </div>
+                        <div class="col-lg-2 col-md-6">
+                            <div class="form-check form-switch assignment-switch">
+                                <input class="form-check-input" [(ngModel)]="assignEmpObj.isActive"  id="isActive" name="isActive" type="checkbox"
+                                    role="switch" checked>
+                                <label class="form-check-label" for="isActive">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-6">
+                            <button class="btn btn-primary assignment-add-button" type="button" (click)="assignEmp()">Add employee</button>
+                        </div>
+                    </div>
+
+                    <div class="assigned-employees">
+                        <div class="assigned-employees-heading">
+                            <div>
+                                <p class="section-title">Current team</p>
+                                <h4>Assigned employees</h4>
+                            </div>
+                            <span class="project-count">3 employees</span>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table assignment-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Employee</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Assigned date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col"><span class="visually-hidden">Actions</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (item of currentSelectedProjectEmp(); track $index) {
+                                        <tr>
+                                        <td>
+                                            <strong>{{item.employeeName}}</strong> 
+                                        </td>
+                                        <td>{{item.role}}</td>
+                                        <td>{{item.assignedDate}}</td>
+                                        <td><span class="assignment-status app-badge">{{item.isActive?'Active':'De-Active'}}</span></td>
+                                        <td class="assignment-actions">
+                                            <button class="btn btn-ghost" type="button">Remove</button>
+                                        </td>
+                                    </tr>
+                                    } @empty {
+                                        <tr >
+                                            <td class="text-center" colspan="5">No Employee Assigned Yet</td>
+                                        </tr>
+                                    }
+                                    
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-ghost" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

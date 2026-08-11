@@ -1,0 +1,170 @@
+ 
+
+
+:root {
+  --bg: #F1F8F4;
+  --surface: #FFFFFF;
+  --surface-soft: #ECFDF5;
+  --primary: #15803D;
+  --primary-rgb: 21, 128, 61;
+  --secondary: #E11D48;
+  --secondary-rgb: 225, 29, 72;
+  --accent: #DCFCE7;
+  --accent-rgb: 220, 252, 231;
+  --text: #17251C;
+  --text-rgb: 23, 37, 28;
+  --muted: #5F7468;
+  --border: rgba(23, 37, 28, 0.12);
+  --shell-gradient: linear-gradient(180deg, #FAFFFC 0%, var(--bg) 100%);
+  --panel-gradient: linear-gradient(180deg, rgba(var(--accent-rgb), 0.44), rgba(255, 255, 255, 0.92));
+  --card-bg: rgba(255, 255, 255, 0.94);
+  --card-border: rgba(var(--text-rgb), 0.08);
+  --card-shadow: 0 14px 32px rgba(var(--text-rgb), 0.05);
+  --hover-bg: rgba(var(--secondary-rgb), 0.1);
+  --input-bg: var(--surface-soft);
+  --focus-ring: rgba(var(--accent-rgb), 0.36);
+  --danger: #F59E0B;
+  --danger-rgb: 245, 158, 11;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: #fff;
+  border: 1px solid rgba(var(--secondary-rgb), 0.22);
+}
+
+.btn-sec {
+  background: var(--primary);
+  color: var(--accent);
+  border: 1px solid rgba(var(--primary-rgb), 0.18);
+}
+
+.btn-ghost {
+  background: var(--danger);
+  color: #fff;
+  border: 1px solid rgba(var(--danger-rgb), 0.22);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.app-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.app-badge {
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.42);
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.app-panel {
+  background: var(--panel-gradient);
+  border: 1px solid rgba(var(--secondary-rgb), 0.14);
+}
+
+.form-control,
+.form-select {
+  border-color: var(--border);
+  background-color: var(--input-bg);
+  color: var(--text);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
+}
+
+.table-card {
+  border-radius: 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.table-scroll {
+  max-height: 450px;
+  overflow: auto;
+}
+
+.table-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(var(--primary-rgb), 0.35);
+  border-radius: 999px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: rgba(var(--accent-rgb), 0.2);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.data-table thead {
+  background: rgba(var(--accent-rgb), 0.2);
+}
+
+.data-table th {
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--card-border);
+}
+
+.data-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.data-table td {
+  color: var(--text);
+}
+
+.table-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+/* You can add global styles to this file, and also import other style files */

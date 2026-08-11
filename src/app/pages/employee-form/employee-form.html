@@ -1,0 +1,79 @@
+<div class="employee-form-page">
+  <div class="form-card app-card">
+    <div class="form-header">
+      <p class="section-title">Employee form</p>
+      <h2>Add or update team member</h2>
+    </div>
+
+    <form class="employee-form" novalidate>
+      <div class="field-grid">
+        <label class="field-group">
+          <span>Employee name</span>
+          <input type="text" name="employeeName" [(ngModel)]="employeeObj.employeeName"  placeholder="Enter full name" />
+        </label>
+
+        <label class="field-group">
+          <span>Contact number</span>
+          <input type="text" name="contactNo" [(ngModel)]="employeeObj.contactNo"  placeholder="Enter contact number" />
+        </label>
+
+        <label class="field-group">
+          <span>Email address</span>
+          <input type="text" name="emailId" [(ngModel)]="employeeObj.emailId"  placeholder="Enter email address" />
+        </label>
+
+        <label class="field-group">
+          <span>Password</span>
+          <input type="password" name="password" [(ngModel)]="employeeObj.password"  placeholder="Set a secure password" />
+        </label>
+
+        <label class="field-group">
+          <span>Department (parent)</span>
+          <select name="deptParent" (change)="onChangeParent($event)">
+            <option value="">Choose parent department</option>
+            @for (item of parentDeptList(); track $index) {
+                 <option [value]="item.departmentId">{{item.departmentName}}</option> 
+            }
+           
+          </select>
+        </label>
+
+        <label class="field-group">
+          <span>Department (child)</span>
+          <select name="deptChild" [(ngModel)]="employeeObj.deptId" >
+            <option value="">Choose child department</option>
+            @for (item of childDeptList(); track $index) {
+                 <option [value]="item.childDeptId">{{item.departmentName}}</option> 
+            }
+           
+          </select>
+        </label>
+
+        <label class="field-group">
+          <span>Gender</span>
+          <select name="gender" [(ngModel)]="employeeObj.gender" >
+            <option value="">Choose gender</option>
+            <option>Female</option>
+            <option>Male</option>
+            <option>Non-binary</option>
+          </select>
+        </label>
+
+        <label class="field-group">
+          <span>Role</span>
+          <input type="text" [(ngModel)]="employeeObj.role"  name="role" placeholder="e.g. Operations lead" />
+        </label>
+      </div>
+
+      <div class="form-actions">
+        @if (currentEditEmpid ==0) {
+             <button class="btn btn-primary" type="button" (click)="onSaveEmp()">Save employee</button>
+        }  @else {
+             <button class="btn btn-secondary" type="button" (click)="onSaveEmp()">Update employee</button>
+        }
+       
+        <button class="btn btn-ghost" type="button">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

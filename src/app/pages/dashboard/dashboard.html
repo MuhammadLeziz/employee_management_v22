@@ -1,0 +1,92 @@
+<div class="dashboard-page">
+	<div class="dashboard-header app-card">
+		<div>
+			<p class="section-title">Workspace overview</p>
+			<h1>Good morning, here is your team at a glance.</h1>
+			<p class="dashboard-subtitle">Track your people and projects from one place.</p>
+		</div>
+		<span class="dashboard-date">Updated today</span>
+	</div>
+
+	@if (dashboardData(); as dashboard) {
+	<div class="row g-3 dashboard-stats">
+		<div class="col-md-6">
+			<article class="stat-card stat-card--employees app-card">
+				<div class="stat-icon app-badge">E</div>
+				<div>
+					<span class="stat-label">Total employees</span>
+					<strong>{{dashboard.totalEmployee}}</strong>
+					<small>People in your organization</small>
+				</div>
+			</article>
+		</div>
+		<div class="col-md-6">
+			<article class="stat-card stat-card--projects app-card">
+				<div class="stat-icon app-badge">P</div>
+				<div>
+					<span class="stat-label">Total projects</span>
+					<strong>{{dashboard.totalProject}}</strong>
+					<small>Projects in your portfolio</small>
+				</div>
+			</article>
+		</div>
+	</div>
+
+	<div class="row g-4 dashboard-lists">
+		<section class="col-lg-5" aria-labelledby="recent-employees-heading">
+			<div class="dashboard-panel app-card">
+				<div class="panel-heading">
+					<div>
+						<p class="section-title">People</p>
+						<h2 id="recent-employees-heading">Recent employees</h2>
+					</div>
+					<span class="panel-count app-badge">{{dashboard.recentEmployee.length}}</span>
+				</div>
+
+				<div class="employee-list">
+					@for (employee of dashboard.recentEmployee; track employee.employeeId) {
+					<article class="employee-row">
+						<div class="employee-avatar app-badge">{{employee.employeeName.charAt(0)}}</div>
+						<div class="employee-info">
+							<strong>{{employee.employeeName}}</strong>
+							<span>{{employee.emailId}}</span>
+						</div>
+						<time [dateTime]="employee.createdDate">{{employee.createdDate | date:'dd MMM'}}</time>
+					</article>
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="col-lg-7" aria-labelledby="recent-projects-heading">
+			<div class="dashboard-panel app-card">
+				<div class="panel-heading">
+					<div>
+						<p class="section-title">Delivery</p>
+						<h2 id="recent-projects-heading">Recent projects</h2>
+					</div>
+					<span class="panel-count app-badge">{{dashboard.recentProjects.length}}</span>
+				</div>
+
+				<div class="project-list">
+					@for (project of dashboard.recentProjects; track project.projectId) {
+					<article class="dashboard-project-row">
+						<div class="project-mark app-badge">{{project.projectName.charAt(0)}}</div>
+						<div class="project-info">
+							<strong>{{project.projectName}}</strong>
+							<span>{{project.clientName}}</span>
+						</div>
+						<div class="project-date">
+							<span>Starts</span>
+							<time [dateTime]="project.startDate">{{project.startDate | date:'dd MMM yyyy'}}</time>
+						</div>
+					</article>
+					}
+				</div>
+			</div>
+		</section>
+	</div>
+	} @else {
+	<div class="dashboard-loading" role="status">Loading dashboard...</div>
+	}
+</div>

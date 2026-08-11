@@ -1,0 +1,25 @@
+<section class="login-page">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="login-logo">EM</span>
+      <div>
+        <h1>Employee Management</h1>
+        <p>Secure access to your dashboard and team tools.</p>
+      </div>
+    </div>
+
+    <form class="login-form" novalidate>
+      <label for="username">Username</label>
+      <input id="username" name="userName" [(ngModel)]="loginObj.userName" type="text" placeholder="Enter your username" autocomplete="username" />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" [(ngModel)]="loginObj.password" type="password" placeholder="Enter your password" autocomplete="current-password" />
+
+      <button type="button" (click)="onLogin()">Sign in</button>
+    </form>
+
+    <div class="login-note">
+      <p>Use your employee credentials to access the system.</p>
+    </div>
+  </div>
+</section>

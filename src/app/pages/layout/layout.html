@@ -1,0 +1,51 @@
+<div class="app-shell " [ngClass]="isSideBarOpen ? '':'sidebar-collapsed'">
+  <aside class="app-sidebar app-card">
+    <div class="sidebar-top">
+      <button class="brand-icon" type="button">EM</button>
+      <div class="brand-text">
+        <span class="brand-meta">Employee Management</span>
+        <strong>Team workspace</strong>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" class="nav-link active" data-short="D">Dashboard</a>
+      <a routerLink="/admin/employee-list" class="nav-link" data-short="E">Employees</a>
+      <a routerLink="/admin/project-list" class="nav-link" data-short="P">Projects</a>
+      <a routerLink="" class="nav-link" data-short="A">Assignments</a>
+      <a routerLink="" class="nav-link" data-short="R">Reports</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Quick access</p>
+      <button class="sidebar-action" type="button">Create entry</button>
+    </div>
+  </aside>
+
+  <div class="main-panel">
+    <header class="topbar app-card">
+      <button (click)="isSideBarOpen = !isSideBarOpen" class="sidebar-toggle" type="button" aria-label="Toggle sidebar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      
+
+      <div class="topbar-user">
+        <span class="user-badge">JL</span>
+        <div class="user-info">
+          <p>{{loggedUserData?.employeeName}}</p>
+          <small>{{loggedUserData?.role}}</small>
+        </div>
+        <button class="logoff-button" type="button" (click)="onLogOof()">Log Off</button>
+      </div>
+    </header>
+
+    <main class="layout-content">
+      <section class="overview-panel app-panel">
+        <router-outlet></router-outlet>
+      </section>
+    </main>
+  </div>
+</div>

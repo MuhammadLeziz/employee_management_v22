@@ -1,0 +1,44 @@
+<div class="employee-list-page">
+    <div class="page-header app-card">
+        <div>
+            <p class="section-title">Employees</p>
+            <h2>Manage your team</h2>
+        </div>
+        <button class="btn btn-primary" routerLink="/admin/new-employee/0">Add employee</button>
+    </div>
+
+    <div class="table-card app-card">
+        <div class="table-scroll">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Email</th>
+                         <th>Gender</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of employeeList$ |async; track $index) {
+                    <tr>
+                        <td>{{$index+1}}</td>
+                        <td>{{item.employeeName}}</td>
+                        <td>{{item.deptId}}</td>
+                        <td>{{item.emailId}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.role}}</td>
+                        <td class="table-actions">
+                            <button class="btn btn-sec" routerLink="/admin/new-employee/{{item.employeeId}}">Edit</button>
+                            <button class="btn btn-ghost">Delete</button>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
